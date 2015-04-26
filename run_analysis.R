@@ -61,3 +61,9 @@ activity_names <- activity_levels$V2[activity_vector]
 
 new_extracted_data <- mutate(extracted_dt, activity=activity_names)
 
+## Get average for each variable for each activity and each subject
+activities <- group_by(new_extracted_data, activity)
+subjects <- group_by(new_extracted_data, subjects)
+
+write.table("new_extracted_data", "output_file.txt", row.name=FALSE)
+
