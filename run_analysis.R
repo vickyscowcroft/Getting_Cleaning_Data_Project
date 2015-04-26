@@ -1,4 +1,5 @@
 library(data.table)
+library(dplyr)
 setwd("/Users/vs/Dropbox/Data_Science_Course/Getting_Cleaning_Data/Course_Project/UCI HAR Dataset")
 
 ## Read in the training files
@@ -43,5 +44,20 @@ test_dt <- cbind(subj_test_dt, y_test_dt)
 names(test_dt) <- c("subject", "activity")
 test_dt <- cbind(test_dt, x_test_dt)
 
+## merged data table created using the data table rbind
 
+merged_dt <- rbind(train_dt, test_dt)
+
+## Extract the mean and std columns using select() and contains()
+## Remember to use multiple calls to contains, rather than lumping them all in one
+extracted_dt <- select(merged_dt, contains("activity"), contains("subject"), contains("mean", ignore.case=TRUE), contains("std", ignore.case=TRUE))
+
+## Add in the activity names
+activity_levels <- data.frame(act_labels)
+activity_vector <- extracted_dt$activity
+activity_names <- activity_levels$V2[activity_vector]
+
+## Replace the activity factor with the activity names using mutate
+
+new_extracted_data <- mutate(extracted_dt, activity=activity_names)
 
