@@ -39,7 +39,10 @@
 6. Using mutate, replace the numeric activity IDs with the descriptive names
 
 7. Create average for each variable for each activity and each subject
+ - Use group_by() and summarise_each() to grab the right summary statistics
+ - Using rbind() with fill=TRUE to fill missing data with NAs.
+ - data will be missing on the activity when the row is about a subject and vice versa.
  
-
-
-
+8. Print the final information to the output file
+ - Using write.table() with row.names =FALSE.
+ - Output file is output_file.txt

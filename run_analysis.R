@@ -62,8 +62,13 @@ activity_names <- activity_levels$V2[activity_vector]
 new_extracted_data <- mutate(extracted_dt, activity=activity_names)
 
 ## Get average for each variable for each activity and each subject
-activities <- group_by(new_extracted_data, activity)
-subjects <- group_by(new_extracted_data, subjects)
+activity_summary <- new_extracted_data %>% group_by(activity) %>% summarise_each(funs(mean), vars=-subject)
+subject_summary <- new_extracted_data %>% group_by(subject) %>% summarise_each(funs(mean), vars=-activity)
 
-write.table("new_extracted_data", "output_file.txt", row.name=FALSE)
+## merge the data into one output file, filling the missing data with NAs
+## Data will be missing in the subject column where the row is about an activity and vice versa
+
+final_merged_data <- rbind(activity_summary, subject_summary, fill=TRUE)
+
+write.table(final_merged_data, "output_file.txt", row.name=FALSE)
 
