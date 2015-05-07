@@ -50,7 +50,7 @@ merged_dt <- rbind(train_dt, test_dt)
 
 ## Extract the mean and std columns using select() and contains()
 ## Remember to use multiple calls to contains, rather than lumping them all in one
-extracted_dt <- select(merged_dt, contains("activity"), contains("subject"), contains("mean", ignore.case=TRUE), contains("std", ignore.case=TRUE))
+extracted_dt <- select(merged_dt, contains("activity"), contains("subject"), contains("mean", ignore.case=TRUE), contains("std", ignore.case=TRUE), -contains("angle", ignore.case=TRUE))
 
 ## Add in the activity names
 activity_levels <- data.frame(act_labels)
