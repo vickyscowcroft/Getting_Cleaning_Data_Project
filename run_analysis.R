@@ -68,7 +68,7 @@ subject_summary <- new_extracted_data %>% group_by(subject) %>% summarise_each(f
 ## merge the data into one output file, filling the missing data with NAs
 ## Data will be missing in the subject column where the row is about an activity and vice versa
 
-final_merged_data <- rbind(activity_summary, subject_summary, fill=TRUE)
+final_merged_data <- rbind(activity_summary, subject_summary,  fill=TRUE)
 
 write.table(final_merged_data, "output_file.txt", row.name=FALSE)
 
