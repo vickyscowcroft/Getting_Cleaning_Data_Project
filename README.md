@@ -34,6 +34,7 @@
  
 5. Extract the columns with mean or std in their name using the dplyr select() command and the contains() option
  - Using multiple calls to contains() to get out the mean, std, activity and subject columns
+ - Using -contains to remove the columns that are labelled 'angle' - we don't need these
  - Using ignore.case() to catch all instances of mean and std
 
 6. Using mutate, replace the numeric activity IDs with the descriptive names
